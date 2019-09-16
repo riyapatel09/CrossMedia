@@ -1,0 +1,22 @@
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    <h2>My Friendlist</h2>
+    {% if friendlist %}
+        {% for friend in friendlist %}
+            <article class="media content-section">
+              <div class="media-body">
+{#                <div class="article-metadata">#}
+                    <img class="rounded-circle account-img" src="{{ friend.friend.profile.image.url }}">
+                    <a class="mr-2" href="/crossmedia/friends/{{ friend.friend.id }}/">{{ friend.friend.username }}</a>
+                    <h5 style="float:right">Friends</h5>
+{#                  <small class="text-muted">{{ sitegroup.description }}</small>#}
+{#                </div>#}
+{#                <h2><a class="article-title" href="#">{{ sitegroup.total_member }}</a></h2>#}
+{#                <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+              </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No friends are available.</p>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    <h2>Profile</h2>
+    {% if instance %}
+
+            <article class="media content-section">
+              <div class="media-body">
+{#                <div class="article-metadata">#}
+                    <img class="rounded-circle account-img" src="{{ instance.profile.image.url }}">
+{#                  <a class="mr-2" href="#">{{ instance.username }}</a>#}
+                    <h6 class="mr-2">Name:{{ instance.username }}   {{ instance.last_name }}</h6>
+                    <h6 class="mr-2">Gender:{{ instance.profile.gender }}</h6>
+                    <h6 class="mr-2">Birthdate:{{ instance.profile.birth_date|date:"F d, Y" }}</h6>
+{#                    <h3 class="mr-2">Name:{{ instance.username }}</h3>#}
+{#                    <h3 class="mr-2">Name:{{ instance.username }}</h3>#}
+{#                    <h3 class="mr-2">Name:{{ instance.username }}</h3>#}
+{#                    <h5 style="float:right"></h5>#}
+{#                  <small class="text-muted">{{ sitegroup.description }}</small>#}
+{#                </div>#}
+{#                <h2><a class="article-title" href="#">{{ sitegroup.total_member }}</a></h2>#}
+{#                <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+              </div>
+            </article>
+
+    {% else %}
+        <p>No details available.</p>
+    {% endif %}
+{% endblock content %}
+
+{#{% extends "crossmedia/base.html" %}#}
+{#{% load static %}#}
+
+{#{% block content %}#}
+{#    <div><h3 style="font-family: auto;">Crossmedia Profile details</h3></div>#}
+{#    <div class="content-section">#}
+{#      <div class="media">#}
+{#        <div style="padding:20px"><img class="rounded-circle account-img" src="{% static 'crossmedia/images/user.png' %}"/></div>#}
+{#          <div style="float:right;padding-left:150px">#}
+{##}
+{#                {% csrf_token %}#}
+{#                   <p class="form-group" >#}
+{#                    <pre class="font-italic">gender:   Female</pre>#}
+{#                    <pre class="font-italic">email-address:   crossmedia@uwindsor.ca</pre>#}
+{#                    <pre class="font-italic">birth_date:      29-july-2019</pre>#}
+{#                    <pre class="font-italic">date_joined:     29-july-2019</pre>#}
+{#                    <pre class="font-italic">Status:          Active</pre>#}
+{#                </p>#}
+{#            #}
+{#      </div>#}
+{#      </div>#}
+{##}
+{#    </div>#}
+{#{% endblock %}#}

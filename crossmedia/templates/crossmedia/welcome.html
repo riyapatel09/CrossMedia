@@ -1,0 +1,27 @@
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    {% if post_list_of_friends %}
+        {% for post in post_list_of_friends %}
+                <article class="media content-section">
+                  <div class="media-body">
+                    <div class="article-metadata">
+                      <h4><a class="mr-2" href="/crossmedia/friends/{{ post.user.id }}/">{{ post.user.username }}</a></h4>
+{#                      <small class="text-muted">{{ sitegroup.description }}</small>#}
+                    </div>
+                    <h4><a class="article-title" href="#">{{ post.title }}</a></h4>
+                      {% if post.image %}
+                          <img style="width:500px;height: 500px" src="{{ post.image.url }}"/>
+                      {% endif %}
+                      <p class="article-content">{{ post.content }}</p>
+                      <small class="text-muted">{{ post.timestamp }}</small>
+{#                    <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+                      <br>
+                      <a class="btn" style="color: #5f788a" href="/crossmedia/post/{{ post.id }}/like/"><i class="fas fa-thumbs-up" title="Like"></i></a> &nbsp&nbsp
+                      {{ post.number_of_like }}
+{#                      <button id="like_post_button"><a href="/crossmedia/post/{{ post.id }}/like/">Like</a></button>#}
+
+                  </div>
+                </article>
+        {% endfor %}
+    {% endif %}
+{% endblock content %}

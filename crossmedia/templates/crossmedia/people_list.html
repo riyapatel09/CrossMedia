@@ -1,0 +1,54 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#</head>#}
+{#<body>#}
+{#{% if remaining_user %}#}
+{#    <ul>#}
+{#    {% for r_user in remaining_user %}#}
+{#        <li>{{ r_user.username }}</li>#}
+{#        <input type="button", value="Send Request", style="float:right">#}
+{#        <form action="#" method="post">#}
+{#            {%csrf_token%}#}
+{#            <input type="button"  value="{{r_user.id}}" name="button">#}
+{#            </form>#}
+{#    {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>No friends are available.</p>#}
+{#{% endif %}#}
+{#</body>#}
+{#</html>#}
+
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    <h2>People You May Know</h2>
+    {% if remaining_user%}
+        {% for r_user in remaining_user %}
+            <article class="media content-section">
+              <div class="media-body">
+{#                <div class="article-metadata">#}
+                    <img class="rounded-circle account-img" src="{{ r_user.profile.image.url }}">
+                    <a class="mr-2" href="/crossmedia/friends/{{ r_user.id }}/">{{ r_user.username }}</a>
+                    {% if is_sent and r_user.id == request_sent_user.id %}
+{#                        {% if r_user.id == request_sent_user.id %}#}
+                            <h6 class="article-title" style="float: right; margin-top: 50px">Request Sent</h6>
+{#                        {% endif %}#}
+                    {% else %}
+                            <div class="form-group" style="float: right; margin-top: 50px">
+                                <button class="btn btn-outline-info" type="submit"><a href="/crossmedia/people/{{ r_user.id }}/send-request/">Send Request</a></button>
+                        </div>
+                    {% endif %}
+{#                  <small class="text-muted">{{ sitegroup.description }}</small>#}
+{#                </div>#}
+{#                <h2><a class="article-title" href="#">{{ sitegroup.total_member }}</a></h2>#}
+{#                <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+              </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No data.</p>
+    {% endif %}
+{% endblock content %}

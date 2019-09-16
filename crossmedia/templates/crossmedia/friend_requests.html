@@ -1,0 +1,24 @@
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    <h2>Pending Friend Requests</h2>
+    {% if received_requests%}
+        {% for requesting_user in received_requests %}
+            <article class="media content-section">
+              <div class="media-body">
+{#                <div class="article-metadata">#}
+                    <img class="rounded-circle account-img" src="{{ requesting_user.user.profile.image.url }}">
+                    <a class="mr-2" href="/crossmedia/friends/{{ requesting_user.user.id }}/">{{ requesting_user.user.username }}</a>
+                    <div class="form-group" style="float: right; margin-top: 50px">
+                            <button class="btn btn-outline-info" type="submit"><a href="/crossmedia/accept-request/{{ requesting_user.user.id }}/">Accept</a></button>
+                    </div>
+{#                  <small class="text-muted">{{ sitegroup.description }}</small>#}
+{#                </div>#}
+{#                <h2><a class="article-title" href="#">{{ sitegroup.total_member }}</a></h2>#}
+{#                <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+              </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <p>No requests found.</p>
+    {% endif %}
+{% endblock content %}

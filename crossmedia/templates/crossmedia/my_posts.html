@@ -1,0 +1,70 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Post-List</title>#}
+{##}
+{#</head>#}
+{#<body>#}
+{#{% if my_posts %}#}
+{#    {% for post in my_posts %}#}
+{#        <h1>{{ post.title }}</h1>#}
+{#                {% if post.image %}#}
+{#                    <img src="{{ post.image.url }}"/>#}
+{#                {% else %}#}
+{#                    <strong>No Image</strong>#}
+{#                {% endif %}#}
+{#                {{ post.id }}<br>#}
+{#                {{ post.title }}<br>#}
+{#                {{ post.content }}<br>#}
+{#                {{ post.timestap }}<br>#}
+{#                {{ post.updated }}<br>#}
+{#        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">#}
+{#        Facebook#}
+{#        </a><br>#}
+{##}
+{#        <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">#}
+{#        Twitter#}
+{#        </a><br>#}
+{##}
+{#        <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'><br>#}
+{##}
+{##}
+{#        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">#}
+{#        Linkedin#}
+{#        </a><br>#}
+{##}
+{#        <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a><br>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
+{#</body>#}
+{#</html>#}
+
+{% extends "crossmedia/base.html" %}
+{% block content %}
+    {% if my_posts %}
+        {% for post in my_posts %}
+                <article class="media content-section">
+                  <div class="media-body">
+                    <div class="article-metadata">
+                        <div class="form-group" style="float: right">
+                            <button class="btn btn-outline-info" type="submit"><a href="/crossmedia/post/{{ post.id }}/edit/">Update</a></button>
+                        </div>
+                        <div class="form-group" style="float: right">
+                            <button class="btn btn-outline-info" type="submit"><a href="/crossmedia/post/{{ post.id }}/delete/">Delete</a></button>
+                        </div>
+                    <h4><a class="article-title" href="#">{{ post.title }}</a></h4>
+{#                        <small class="text-muted">{{ sitegroup.description }}</small>#}
+
+                    </div>
+                      {% if post.image %}
+                          <img style="width:500px;height: 500px" src="{{ post.image.url }}"/>
+                      {% endif %}
+                      <p class="article-content">{{ post.content }}</p>
+                      <small class="text-muted">{{ post.timestamp }}</small>
+{#                    <p class="article-content">{{ sitegroup.created_at|date:"F d, Y" }}</p>#}
+                  </div>
+                </article>
+        {% endfor %}
+    {% endif %}
+{% endblock content %}
